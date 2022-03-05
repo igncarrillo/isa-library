@@ -1,0 +1,17 @@
+package ar.edu.um.service.mapper;
+
+import ar.edu.um.domain.Client;
+import ar.edu.um.service.dto.ClientDTO;
+import org.mapstruct.*;
+
+/**
+ * Mapper for the entity {@link Client} and its DTO {@link ClientDTO}.
+ */
+@Mapper(componentModel = "spring", uses = {})
+public interface ClientMapper extends EntityMapper<ClientDTO, Client> {
+    @Named("email")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "email", source = "email")
+    ClientDTO toDtoEmail(Client client);
+}
