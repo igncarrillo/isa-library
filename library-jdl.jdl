@@ -1,0 +1,57 @@
+application {
+  config {
+    baseName library,
+    applicationType monolith,
+    authenticationType jwt
+    packageName ar.edu.um,
+    prodDatabaseType postgresql,
+    cacheProvider no,
+    buildTool maven,
+    clientFramework angular,
+    testFrameworks [cypress],
+	nativeLanguage en,
+  }
+  entities *
+}
+
+DEFAULT_MIN_LENGTH = 4
+DEFAULT_MAX_LENGTH = 50
+
+entity Author {
+  firstName String required maxlength(DEFAULT_MAX_LENGTH)
+  lastName String required maxlength(DEFAULT_MAX_LENGTH)
+}
+
+entity Client {
+  firstName String required maxlength(DEFAULT_MAX_LENGTH)
+  lastName String  required maxlength(DEFAULT_MAX_LENGTH)
+  email String unique required maxlength(DEFAULT_MAX_LENGTH)
+  address String maxlength(DEFAULT_MAX_LENGTH)
+  phone String maxlength(20)
+}
+
+entity Book{
+  isbn String required unique minlength(5) maxlength(13)
+  name String required maxlength(100)
+  publishYear String minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH)
+  copies Integer required
+  cover ImageBlob
+}
+
+entity BorrowedBook{
+  borrowDate LocalDate
+}
+
+relationship OneToOne {
+  BorrowedBook{book required} to Book
+  BorrowedBook{client required} to Client
+}
+
+relationship ManyToOne {
+  Book{author required} to Author
+}
+
+filter Book, Client, Author, BorrowedBook
+paginate Book, Client, Author, BorrowedBook with infinite-scroll
+service all with serviceImpl
+dto * with mapstruct
