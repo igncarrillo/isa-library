@@ -16,7 +16,7 @@ describe('Author e2e test', () => {
   const authorPageUrlPattern = new RegExp('/author(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const authorSample = { firstName: 'Telly', lastName: 'Hilpert' };
+  const authorSample = { name: 'Bedfordshire Creek policy' };
 
   let author: any;
 
@@ -151,9 +151,7 @@ describe('Author e2e test', () => {
     });
 
     it('should create an instance of Author', () => {
-      cy.get(`[data-cy="firstName"]`).type('Geraldine').should('have.value', 'Geraldine');
-
-      cy.get(`[data-cy="lastName"]`).type('Little').should('have.value', 'Little');
+      cy.get(`[data-cy="name"]`).type('Turkmenistan Card').should('have.value', 'Turkmenistan Card');
 
       cy.get(entityCreateSaveButtonSelector).click();
 

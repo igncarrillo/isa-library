@@ -1,21 +1,15 @@
 {
   "applications": ["library"],
-  "changelogDate": "20220306132028",
+  "changelogDate": "20220306152232",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "author",
   "fields": [
     {
-      "fieldName": "firstName",
+      "fieldName": "name",
       "fieldType": "String",
       "fieldValidateRules": ["required", "maxlength"],
-      "fieldValidateRulesMaxlength": "50"
-    },
-    {
-      "fieldName": "lastName",
-      "fieldType": "String",
-      "fieldValidateRules": ["required", "maxlength"],
-      "fieldValidateRulesMaxlength": "50"
+      "fieldValidateRulesMaxlength": "80"
     }
   ],
   "fluentMethods": true,

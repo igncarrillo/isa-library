@@ -61,11 +61,15 @@ public class BorrowedBookServiceImpl implements BorrowedBookService {
         return borrowedBookRepository.findAll(pageable).map(borrowedBookMapper::toDto);
     }
 
+    public Page<BorrowedBookDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return borrowedBookRepository.findAllWithEagerRelationships(pageable).map(borrowedBookMapper::toDto);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<BorrowedBookDTO> findOne(Long id) {
         log.debug("Request to get BorrowedBook : {}", id);
-        return borrowedBookRepository.findById(id).map(borrowedBookMapper::toDto);
+        return borrowedBookRepository.findOneWithEagerRelationships(id).map(borrowedBookMapper::toDto);
     }
 
     @Override

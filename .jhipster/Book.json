@@ -1,6 +1,6 @@
 {
   "applications": ["library"],
-  "changelogDate": "20220306132228",
+  "changelogDate": "20220306152432",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "book",
@@ -43,6 +43,7 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "name",
       "otherEntityName": "author",
       "otherEntityRelationshipName": "book",
       "relationshipName": "author",

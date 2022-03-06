@@ -18,8 +18,7 @@ DEFAULT_MIN_LENGTH = 4
 DEFAULT_MAX_LENGTH = 50
 
 entity Author {
-  firstName String required maxlength(DEFAULT_MAX_LENGTH)
-  lastName String required maxlength(DEFAULT_MAX_LENGTH)
+  name String required maxlength(80)
 }
 
 entity Client {
@@ -43,12 +42,12 @@ entity BorrowedBook{
 }
 
 relationship OneToOne {
-  BorrowedBook{book required} to Book
-  BorrowedBook{client required} to Client
+  BorrowedBook{book(name) required} to Book
+  BorrowedBook{client(email) required} to Client
 }
 
 relationship ManyToOne {
-  Book{author required} to Author
+  Book{author(name) required} to Author
 }
 
 filter Book, Client, Author, BorrowedBook

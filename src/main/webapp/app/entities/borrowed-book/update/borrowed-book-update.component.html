@@ -42,7 +42,7 @@
               [ngValue]="bookOption.id === editForm.get('book')!.value?.id ? editForm.get('book')!.value : bookOption"
               *ngFor="let bookOption of booksCollection; trackBy: trackBookById"
             >
-              {{ bookOption.id }}
+              {{ bookOption.name }}
             </option>
           </select>
         </div>
@@ -60,7 +60,7 @@
               [ngValue]="clientOption.id === editForm.get('client')!.value?.id ? editForm.get('client')!.value : clientOption"
               *ngFor="let clientOption of clientsCollection; trackBy: trackClientById"
             >
-              {{ clientOption.id }}
+              {{ clientOption.email }}
             </option>
           </select>
         </div>

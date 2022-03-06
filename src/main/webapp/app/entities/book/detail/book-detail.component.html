@@ -42,7 +42,7 @@
         <dt><span jhiTranslate="libraryApp.book.author">Author</span></dt>
         <dd>
           <div *ngIf="book.author">
-            <a [routerLink]="['/author', book.author?.id, 'view']">{{ book.author?.id }}</a>
+            <a [routerLink]="['/author', book.author?.id, 'view']">{{ book.author?.name }}</a>
           </div>
         </dd>
       </dl>

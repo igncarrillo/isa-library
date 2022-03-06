@@ -17,8 +17,7 @@ export class AuthorUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    firstName: [null, [Validators.required, Validators.maxLength(50)]],
-    lastName: [null, [Validators.required, Validators.maxLength(50)]],
+    name: [null, [Validators.required, Validators.maxLength(80)]],
   });
 
   constructor(protected authorService: AuthorService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -65,8 +64,7 @@ export class AuthorUpdateComponent implements OnInit {
   protected updateForm(author: IAuthor): void {
     this.editForm.patchValue({
       id: author.id,
-      firstName: author.firstName,
-      lastName: author.lastName,
+      name: author.name,
     });
   }
 
@@ -74,8 +72,7 @@ export class AuthorUpdateComponent implements OnInit {
     return {
       ...new Author(),
       id: this.editForm.get(['id'])!.value,
-      firstName: this.editForm.get(['firstName'])!.value,
-      lastName: this.editForm.get(['lastName'])!.value,
+      name: this.editForm.get(['name'])!.value,
     };
   }
 }
