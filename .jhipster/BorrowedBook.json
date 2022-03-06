@@ -1,6 +1,6 @@
 {
   "applications": ["library"],
-  "changelogDate": "20220306005530",
+  "changelogDate": "20220306132328",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "borrowed_book",

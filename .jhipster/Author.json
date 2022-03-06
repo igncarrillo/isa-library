@@ -1,6 +1,6 @@
 {
   "applications": ["library"],
-  "changelogDate": "20220306005230",
+  "changelogDate": "20220306132028",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "author",
