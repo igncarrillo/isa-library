@@ -21,8 +21,7 @@ describe('Author Service', () => {
 
     elemDefault = {
       id: 0,
-      firstName: 'AAAAAAA',
-      lastName: 'AAAAAAA',
+      name: 'AAAAAAA',
     };
   });
 
@@ -58,8 +57,7 @@ describe('Author Service', () => {
       const returnedFromService = Object.assign(
         {
           id: 1,
-          firstName: 'BBBBBB',
-          lastName: 'BBBBBB',
+          name: 'BBBBBB',
         },
         elemDefault
       );
@@ -91,8 +89,7 @@ describe('Author Service', () => {
       const returnedFromService = Object.assign(
         {
           id: 1,
-          firstName: 'BBBBBB',
-          lastName: 'BBBBBB',
+          name: 'BBBBBB',
         },
         elemDefault
       );
@@ -144,7 +141,7 @@ describe('Author Service', () => {
       });
 
       it('should add only unique Author to an array', () => {
-        const authorArray: IAuthor[] = [{ id: 123 }, { id: 456 }, { id: 97865 }];
+        const authorArray: IAuthor[] = [{ id: 123 }, { id: 456 }, { id: 46673 }];
         const authorCollection: IAuthor[] = [{ id: 123 }];
         expectedResult = service.addAuthorToCollectionIfMissing(authorCollection, ...authorArray);
         expect(expectedResult).toHaveLength(3);

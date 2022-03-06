@@ -12,12 +12,8 @@ public class AuthorDTO implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(max = 50)
-    private String firstName;
-
-    @NotNull
-    @Size(max = 50)
-    private String lastName;
+    @Size(max = 80)
+    private String name;
 
     public Long getId() {
         return id;
@@ -27,20 +23,12 @@ public class AuthorDTO implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -69,8 +57,7 @@ public class AuthorDTO implements Serializable {
     public String toString() {
         return "AuthorDTO{" +
             "id=" + getId() +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

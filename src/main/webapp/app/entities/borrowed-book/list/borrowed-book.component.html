@@ -36,10 +36,10 @@
           <th scope="col" jhiSortBy="borrowDate">
             <span jhiTranslate="libraryApp.borrowedBook.borrowDate">Borrow Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="book.id">
+          <th scope="col" jhiSortBy="book.name">
             <span jhiTranslate="libraryApp.borrowedBook.book">Book</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="client.id">
+          <th scope="col" jhiSortBy="client.email">
             <span jhiTranslate="libraryApp.borrowedBook.client">Client</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
@@ -53,12 +53,12 @@
           <td>{{ borrowedBook.borrowDate | formatMediumDate }}</td>
           <td>
             <div *ngIf="borrowedBook.book">
-              <a [routerLink]="['/book', borrowedBook.book?.id, 'view']">{{ borrowedBook.book?.id }}</a>
+              <a [routerLink]="['/book', borrowedBook.book?.id, 'view']">{{ borrowedBook.book?.name }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="borrowedBook.client">
-              <a [routerLink]="['/client', borrowedBook.client?.id, 'view']">{{ borrowedBook.client?.id }}</a>
+              <a [routerLink]="['/client', borrowedBook.client?.id, 'view']">{{ borrowedBook.client?.email }}</a>
             </div>
           </td>
           <td class="text-end">

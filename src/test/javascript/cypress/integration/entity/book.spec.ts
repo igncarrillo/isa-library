@@ -30,7 +30,7 @@ describe('Book e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/authors',
-      body: { firstName: 'Reece', lastName: 'West' },
+      body: { name: 'Optimization empowering Unbranded' },
     }).then(({ body }) => {
       author = body;
     });

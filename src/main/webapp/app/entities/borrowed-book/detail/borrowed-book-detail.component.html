@@ -21,13 +21,13 @@
         <dt><span jhiTranslate="libraryApp.borrowedBook.book">Book</span></dt>
         <dd>
           <div *ngIf="borrowedBook.book">
-            <a [routerLink]="['/book', borrowedBook.book?.id, 'view']">{{ borrowedBook.book?.id }}</a>
+            <a [routerLink]="['/book', borrowedBook.book?.id, 'view']">{{ borrowedBook.book?.name }}</a>
           </div>
         </dd>
         <dt><span jhiTranslate="libraryApp.borrowedBook.client">Client</span></dt>
         <dd>
           <div *ngIf="borrowedBook.client">
-            <a [routerLink]="['/client', borrowedBook.client?.id, 'view']">{{ borrowedBook.client?.id }}</a>
+            <a [routerLink]="['/client', borrowedBook.client?.id, 'view']">{{ borrowedBook.client?.email }}</a>
           </div>
         </dd>
       </dl>

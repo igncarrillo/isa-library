@@ -18,8 +18,7 @@
         "title": "Author"
       },
       "id": "ID",
-      "firstName": "First Name",
-      "lastName": "Last Name"
+      "name": "Name"
     }
   }
 }

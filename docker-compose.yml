@@ -8,14 +8,16 @@ services:
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - SPRING_DATASOURCE_URL=jdbc:postgresql://library-postgresql:5432/library
       - SPRING_LIQUIBASE_URL=jdbc:postgresql://library-postgresql:5432/library
-      - JHIPSTER_SLEEP=25
+      - JHIPSTER_SLEEP=10
     ports:
       - '8080:8080'
   library-postgresql:
     volumes:
-      - ~/volumes/jhipster/library/postgresql/:/var/lib/postgresql/data
+      - database_data:/var/lib/postgresql/data/
     image: postgres:14.2
     environment:
       - POSTGRES_USER=library
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
+volumes:
+  database_data:

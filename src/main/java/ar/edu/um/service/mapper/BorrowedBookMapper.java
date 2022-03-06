@@ -9,7 +9,7 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring", uses = { BookMapper.class, ClientMapper.class })
 public interface BorrowedBookMapper extends EntityMapper<BorrowedBookDTO, BorrowedBook> {
-    @Mapping(target = "book", source = "book", qualifiedByName = "id")
-    @Mapping(target = "client", source = "client", qualifiedByName = "id")
+    @Mapping(target = "book", source = "book", qualifiedByName = "name")
+    @Mapping(target = "client", source = "client", qualifiedByName = "email")
     BorrowedBookDTO toDto(BorrowedBook s);
 }

@@ -33,12 +33,7 @@
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="firstName">
-            <span jhiTranslate="libraryApp.author.firstName">First Name</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="lastName">
-            <span jhiTranslate="libraryApp.author.lastName">Last Name</span> <fa-icon icon="sort"></fa-icon>
-          </th>
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="libraryApp.author.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -47,8 +42,7 @@
           <td>
             <a [routerLink]="['/author', author.id, 'view']">{{ author.id }}</a>
           </td>
-          <td>{{ author.firstName }}</td>
-          <td>{{ author.lastName }}</td>
+          <td>{{ author.name }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/author', author.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

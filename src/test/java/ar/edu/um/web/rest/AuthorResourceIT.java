@@ -32,11 +32,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class AuthorResourceIT {
 
-    private static final String DEFAULT_FIRST_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_FIRST_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_LAST_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/authors";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -65,7 +62,7 @@ class AuthorResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Author createEntity(EntityManager em) {
-        Author author = new Author().firstName(DEFAULT_FIRST_NAME).lastName(DEFAULT_LAST_NAME);
+        Author author = new Author().name(DEFAULT_NAME);
         return author;
     }
 
@@ -76,7 +73,7 @@ class AuthorResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Author createUpdatedEntity(EntityManager em) {
-        Author author = new Author().firstName(UPDATED_FIRST_NAME).lastName(UPDATED_LAST_NAME);
+        Author author = new Author().name(UPDATED_NAME);
         return author;
     }
 
@@ -99,8 +96,7 @@ class AuthorResourceIT {
         List<Author> authorList = authorRepository.findAll();
         assertThat(authorList).hasSize(databaseSizeBeforeCreate + 1);
         Author testAuthor = authorList.get(authorList.size() - 1);
-        assertThat(testAuthor.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
-        assertThat(testAuthor.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
+        assertThat(testAuthor.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -124,28 +120,10 @@ class AuthorResourceIT {
 
     @Test
     @Transactional
-    void checkFirstNameIsRequired() throws Exception {
+    void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = authorRepository.findAll().size();
         // set the field null
-        author.setFirstName(null);
-
-        // Create the Author, which fails.
-        AuthorDTO authorDTO = authorMapper.toDto(author);
-
-        restAuthorMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(authorDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Author> authorList = authorRepository.findAll();
-        assertThat(authorList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    void checkLastNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = authorRepository.findAll().size();
-        // set the field null
-        author.setLastName(null);
+        author.setName(null);
 
         // Create the Author, which fails.
         AuthorDTO authorDTO = authorMapper.toDto(author);
@@ -170,8 +148,7 @@ class AuthorResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(author.getId().intValue())))
-            .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
-            .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
 
     @Test
@@ -186,8 +163,7 @@ class AuthorResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(author.getId().intValue()))
-            .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME))
-            .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
@@ -210,158 +186,80 @@ class AuthorResourceIT {
 
     @Test
     @Transactional
-    void getAllAuthorsByFirstNameIsEqualToSomething() throws Exception {
+    void getAllAuthorsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         authorRepository.saveAndFlush(author);
 
-        // Get all the authorList where firstName equals to DEFAULT_FIRST_NAME
-        defaultAuthorShouldBeFound("firstName.equals=" + DEFAULT_FIRST_NAME);
+        // Get all the authorList where name equals to DEFAULT_NAME
+        defaultAuthorShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the authorList where firstName equals to UPDATED_FIRST_NAME
-        defaultAuthorShouldNotBeFound("firstName.equals=" + UPDATED_FIRST_NAME);
+        // Get all the authorList where name equals to UPDATED_NAME
+        defaultAuthorShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    void getAllAuthorsByFirstNameIsNotEqualToSomething() throws Exception {
+    void getAllAuthorsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         authorRepository.saveAndFlush(author);
 
-        // Get all the authorList where firstName not equals to DEFAULT_FIRST_NAME
-        defaultAuthorShouldNotBeFound("firstName.notEquals=" + DEFAULT_FIRST_NAME);
+        // Get all the authorList where name not equals to DEFAULT_NAME
+        defaultAuthorShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the authorList where firstName not equals to UPDATED_FIRST_NAME
-        defaultAuthorShouldBeFound("firstName.notEquals=" + UPDATED_FIRST_NAME);
+        // Get all the authorList where name not equals to UPDATED_NAME
+        defaultAuthorShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    void getAllAuthorsByFirstNameIsInShouldWork() throws Exception {
+    void getAllAuthorsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         authorRepository.saveAndFlush(author);
 
-        // Get all the authorList where firstName in DEFAULT_FIRST_NAME or UPDATED_FIRST_NAME
-        defaultAuthorShouldBeFound("firstName.in=" + DEFAULT_FIRST_NAME + "," + UPDATED_FIRST_NAME);
+        // Get all the authorList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultAuthorShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the authorList where firstName equals to UPDATED_FIRST_NAME
-        defaultAuthorShouldNotBeFound("firstName.in=" + UPDATED_FIRST_NAME);
+        // Get all the authorList where name equals to UPDATED_NAME
+        defaultAuthorShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    void getAllAuthorsByFirstNameIsNullOrNotNull() throws Exception {
+    void getAllAuthorsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         authorRepository.saveAndFlush(author);
 
-        // Get all the authorList where firstName is not null
-        defaultAuthorShouldBeFound("firstName.specified=true");
+        // Get all the authorList where name is not null
+        defaultAuthorShouldBeFound("name.specified=true");
 
-        // Get all the authorList where firstName is null
-        defaultAuthorShouldNotBeFound("firstName.specified=false");
+        // Get all the authorList where name is null
+        defaultAuthorShouldNotBeFound("name.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllAuthorsByFirstNameContainsSomething() throws Exception {
+    void getAllAuthorsByNameContainsSomething() throws Exception {
         // Initialize the database
         authorRepository.saveAndFlush(author);
 
-        // Get all the authorList where firstName contains DEFAULT_FIRST_NAME
-        defaultAuthorShouldBeFound("firstName.contains=" + DEFAULT_FIRST_NAME);
+        // Get all the authorList where name contains DEFAULT_NAME
+        defaultAuthorShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the authorList where firstName contains UPDATED_FIRST_NAME
-        defaultAuthorShouldNotBeFound("firstName.contains=" + UPDATED_FIRST_NAME);
+        // Get all the authorList where name contains UPDATED_NAME
+        defaultAuthorShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    void getAllAuthorsByFirstNameNotContainsSomething() throws Exception {
+    void getAllAuthorsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         authorRepository.saveAndFlush(author);
 
-        // Get all the authorList where firstName does not contain DEFAULT_FIRST_NAME
-        defaultAuthorShouldNotBeFound("firstName.doesNotContain=" + DEFAULT_FIRST_NAME);
+        // Get all the authorList where name does not contain DEFAULT_NAME
+        defaultAuthorShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the authorList where firstName does not contain UPDATED_FIRST_NAME
-        defaultAuthorShouldBeFound("firstName.doesNotContain=" + UPDATED_FIRST_NAME);
-    }
-
-    @Test
-    @Transactional
-    void getAllAuthorsByLastNameIsEqualToSomething() throws Exception {
-        // Initialize the database
-        authorRepository.saveAndFlush(author);
-
-        // Get all the authorList where lastName equals to DEFAULT_LAST_NAME
-        defaultAuthorShouldBeFound("lastName.equals=" + DEFAULT_LAST_NAME);
-
-        // Get all the authorList where lastName equals to UPDATED_LAST_NAME
-        defaultAuthorShouldNotBeFound("lastName.equals=" + UPDATED_LAST_NAME);
-    }
-
-    @Test
-    @Transactional
-    void getAllAuthorsByLastNameIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        authorRepository.saveAndFlush(author);
-
-        // Get all the authorList where lastName not equals to DEFAULT_LAST_NAME
-        defaultAuthorShouldNotBeFound("lastName.notEquals=" + DEFAULT_LAST_NAME);
-
-        // Get all the authorList where lastName not equals to UPDATED_LAST_NAME
-        defaultAuthorShouldBeFound("lastName.notEquals=" + UPDATED_LAST_NAME);
-    }
-
-    @Test
-    @Transactional
-    void getAllAuthorsByLastNameIsInShouldWork() throws Exception {
-        // Initialize the database
-        authorRepository.saveAndFlush(author);
-
-        // Get all the authorList where lastName in DEFAULT_LAST_NAME or UPDATED_LAST_NAME
-        defaultAuthorShouldBeFound("lastName.in=" + DEFAULT_LAST_NAME + "," + UPDATED_LAST_NAME);
-
-        // Get all the authorList where lastName equals to UPDATED_LAST_NAME
-        defaultAuthorShouldNotBeFound("lastName.in=" + UPDATED_LAST_NAME);
-    }
-
-    @Test
-    @Transactional
-    void getAllAuthorsByLastNameIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        authorRepository.saveAndFlush(author);
-
-        // Get all the authorList where lastName is not null
-        defaultAuthorShouldBeFound("lastName.specified=true");
-
-        // Get all the authorList where lastName is null
-        defaultAuthorShouldNotBeFound("lastName.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllAuthorsByLastNameContainsSomething() throws Exception {
-        // Initialize the database
-        authorRepository.saveAndFlush(author);
-
-        // Get all the authorList where lastName contains DEFAULT_LAST_NAME
-        defaultAuthorShouldBeFound("lastName.contains=" + DEFAULT_LAST_NAME);
-
-        // Get all the authorList where lastName contains UPDATED_LAST_NAME
-        defaultAuthorShouldNotBeFound("lastName.contains=" + UPDATED_LAST_NAME);
-    }
-
-    @Test
-    @Transactional
-    void getAllAuthorsByLastNameNotContainsSomething() throws Exception {
-        // Initialize the database
-        authorRepository.saveAndFlush(author);
-
-        // Get all the authorList where lastName does not contain DEFAULT_LAST_NAME
-        defaultAuthorShouldNotBeFound("lastName.doesNotContain=" + DEFAULT_LAST_NAME);
-
-        // Get all the authorList where lastName does not contain UPDATED_LAST_NAME
-        defaultAuthorShouldBeFound("lastName.doesNotContain=" + UPDATED_LAST_NAME);
+        // Get all the authorList where name does not contain UPDATED_NAME
+        defaultAuthorShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -373,8 +271,7 @@ class AuthorResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(author.getId().intValue())))
-            .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
-            .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restAuthorMockMvc
@@ -422,7 +319,7 @@ class AuthorResourceIT {
         Author updatedAuthor = authorRepository.findById(author.getId()).get();
         // Disconnect from session so that the updates on updatedAuthor are not directly saved in db
         em.detach(updatedAuthor);
-        updatedAuthor.firstName(UPDATED_FIRST_NAME).lastName(UPDATED_LAST_NAME);
+        updatedAuthor.name(UPDATED_NAME);
         AuthorDTO authorDTO = authorMapper.toDto(updatedAuthor);
 
         restAuthorMockMvc
@@ -437,8 +334,7 @@ class AuthorResourceIT {
         List<Author> authorList = authorRepository.findAll();
         assertThat(authorList).hasSize(databaseSizeBeforeUpdate);
         Author testAuthor = authorList.get(authorList.size() - 1);
-        assertThat(testAuthor.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
-        assertThat(testAuthor.getLastName()).isEqualTo(UPDATED_LAST_NAME);
+        assertThat(testAuthor.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test
@@ -518,8 +414,6 @@ class AuthorResourceIT {
         Author partialUpdatedAuthor = new Author();
         partialUpdatedAuthor.setId(author.getId());
 
-        partialUpdatedAuthor.lastName(UPDATED_LAST_NAME);
-
         restAuthorMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedAuthor.getId())
@@ -532,8 +426,7 @@ class AuthorResourceIT {
         List<Author> authorList = authorRepository.findAll();
         assertThat(authorList).hasSize(databaseSizeBeforeUpdate);
         Author testAuthor = authorList.get(authorList.size() - 1);
-        assertThat(testAuthor.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
-        assertThat(testAuthor.getLastName()).isEqualTo(UPDATED_LAST_NAME);
+        assertThat(testAuthor.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -548,7 +441,7 @@ class AuthorResourceIT {
         Author partialUpdatedAuthor = new Author();
         partialUpdatedAuthor.setId(author.getId());
 
-        partialUpdatedAuthor.firstName(UPDATED_FIRST_NAME).lastName(UPDATED_LAST_NAME);
+        partialUpdatedAuthor.name(UPDATED_NAME);
 
         restAuthorMockMvc
             .perform(
@@ -562,8 +455,7 @@ class AuthorResourceIT {
         List<Author> authorList = authorRepository.findAll();
         assertThat(authorList).hasSize(databaseSizeBeforeUpdate);
         Author testAuthor = authorList.get(authorList.size() - 1);
-        assertThat(testAuthor.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
-        assertThat(testAuthor.getLastName()).isEqualTo(UPDATED_LAST_NAME);
+        assertThat(testAuthor.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

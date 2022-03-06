@@ -28,9 +28,7 @@ public class AuthorCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter firstName;
-
-    private StringFilter lastName;
+    private StringFilter name;
 
     private Boolean distinct;
 
@@ -38,8 +36,7 @@ public class AuthorCriteria implements Serializable, Criteria {
 
     public AuthorCriteria(AuthorCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
-        this.firstName = other.firstName == null ? null : other.firstName.copy();
-        this.lastName = other.lastName == null ? null : other.lastName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.distinct = other.distinct;
     }
 
@@ -63,34 +60,19 @@ public class AuthorCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getFirstName() {
-        return firstName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public StringFilter firstName() {
-        if (firstName == null) {
-            firstName = new StringFilter();
+    public StringFilter name() {
+        if (name == null) {
+            name = new StringFilter();
         }
-        return firstName;
+        return name;
     }
 
-    public void setFirstName(StringFilter firstName) {
-        this.firstName = firstName;
-    }
-
-    public StringFilter getLastName() {
-        return lastName;
-    }
-
-    public StringFilter lastName() {
-        if (lastName == null) {
-            lastName = new StringFilter();
-        }
-        return lastName;
-    }
-
-    public void setLastName(StringFilter lastName) {
-        this.lastName = lastName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public Boolean getDistinct() {
@@ -110,17 +92,12 @@ public class AuthorCriteria implements Serializable, Criteria {
             return false;
         }
         final AuthorCriteria that = (AuthorCriteria) o;
-        return (
-            Objects.equals(id, that.id) &&
-            Objects.equals(firstName, that.firstName) &&
-            Objects.equals(lastName, that.lastName) &&
-            Objects.equals(distinct, that.distinct)
-        );
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(distinct, that.distinct);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, distinct);
+        return Objects.hash(id, name, distinct);
     }
 
     // prettier-ignore
@@ -128,8 +105,7 @@ public class AuthorCriteria implements Serializable, Criteria {
     public String toString() {
         return "AuthorCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
-            (firstName != null ? "firstName=" + firstName + ", " : "") +
-            (lastName != null ? "lastName=" + lastName + ", " : "") +
+            (name != null ? "name=" + name + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

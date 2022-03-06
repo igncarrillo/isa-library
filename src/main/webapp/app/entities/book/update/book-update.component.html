@@ -146,7 +146,7 @@
               [ngValue]="authorOption.id === editForm.get('author')!.value?.id ? editForm.get('author')!.value : authorOption"
               *ngFor="let authorOption of authorsSharedCollection; trackBy: trackAuthorById"
             >
-              {{ authorOption.id }}
+              {{ authorOption.name }}
             </option>
           </select>
         </div>

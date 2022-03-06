@@ -20,14 +20,9 @@ public class Author implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(max = 50)
-    @Column(name = "first_name", length = 50, nullable = false)
-    private String firstName;
-
-    @NotNull
-    @Size(max = 50)
-    @Column(name = "last_name", length = 50, nullable = false)
-    private String lastName;
+    @Size(max = 80)
+    @Column(name = "name", length = 80, nullable = false)
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -44,30 +39,17 @@ public class Author implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return this.firstName;
+    public String getName() {
+        return this.name;
     }
 
-    public Author firstName(String firstName) {
-        this.setFirstName(firstName);
+    public Author name(String name) {
+        this.setName(name);
         return this;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public Author lastName(String lastName) {
-        this.setLastName(lastName);
-        return this;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -94,8 +76,7 @@ public class Author implements Serializable {
     public String toString() {
         return "Author{" +
             "id=" + getId() +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }
