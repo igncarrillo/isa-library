@@ -1,6 +1,8 @@
 version: "3"
 services:
+
   library:
+    restart: unless-stopped
     image: library
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
@@ -11,7 +13,11 @@ services:
       - JHIPSTER_SLEEP=10
     ports:
       - '8080:8080'
+    depends_on:
+      - library-postgresql
+
   library-postgresql:
+    restart: unless-stopped
     volumes:
       - database_data:/var/lib/postgresql/data/
     image: postgres:14.2
@@ -19,5 +25,43 @@ services:
       - POSTGRES_USER=library
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
+
+  elk:
+    restart: unless-stopped
+    image: sebp/elk
+    networks:
+      - elknet
+    ports:
+      - "5601:5601" #kibana web interface
+      # - "9200:9200" #elasticsearch json interface
+      # - "5044:5044" #Logstash beats input
+      - "5000:5000" #Logstash input
+    volumes:
+      - /Users/NachoC/Documents/codigos/softAplicada/isa-library/logstash.conf:/usr/share/logstash/pipeline/
+      - /Users/NachoC/Documents/codigos/softAplicada/isa-library/logstash.yml:/usr/share/logstash/config/
+    environment:
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ES_CONNECT_RETRY=300
+      - xpack.security.enabled=true
+
+  filebeat:
+    restart: unless-stopped
+    image: docker.elastic.co/beats/filebeat:8.0.1
+    # https://github.com/docker/swarmkit/issues/1951
+    # Need to override user so we can access the log files, and docker.sock
+    user: root
+    networks:
+      - elknet
+    volumes:
+      - /Users/NachoC/Documents/codigos/softAplicada/isa-library/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    # disable strict permission checks
+    command: [ "--strict.perms=false" ]
+
+networks:
+  elknet:
+    driver: 'bridge'
+
 volumes:
   database_data:

@@ -1,0 +1,14 @@
+filebeat.inputs:
+  - type: container
+    enabled: true
+    paths:
+      - /var/lib/docker/containers/*/*.log
+
+output.elasticsearch:
+  hosts: ["elk:9200"]
+
+setup.kibana:
+  host: "elk:5601"
+
+logging.metrics.enabled: true
+
