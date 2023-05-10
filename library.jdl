@@ -1,0 +1,57 @@
+application {
+  config {
+    baseName library,
+    applicationType monolith,
+    authenticationType jwt
+    packageName ar.edu.um,
+    cacheProvider no,
+    buildTool maven,
+    clientFramework angular,
+    testFrameworks [cypress],
+	nativeLanguage en,
+    enableSwaggerCodegen true
+  }
+  entities *
+}
+
+DEFAULT_MIN_LENGTH = 4
+DEFAULT_MAX_LENGTH = 50
+
+entity Author {
+  name String required maxlength(DEFAULT_MAX_LENGTH)
+}
+
+entity Client {
+  firstName String required maxlength(DEFAULT_MAX_LENGTH)
+  lastName String  required maxlength(DEFAULT_MAX_LENGTH)
+  email String unique maxlength(DEFAULT_MAX_LENGTH)
+  address String maxlength(DEFAULT_MAX_LENGTH)
+  phone String maxlength(20)
+}
+
+entity Book{
+  isbn String required unique minlength(5) maxlength(13)
+  name String required maxlength(100)
+  publishYear String required minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH)
+  copies Integer required
+}
+
+entity BorrowedBook{
+  borrowDate LocalDate
+}
+
+relationship OneToOne {
+  BorrowedBook{book(name) required} to Book
+  BorrowedBook{Client(email) required} to Client
+}
+
+relationship ManyToMany {
+  Book{author(name)} to Author{book}
+}
+
+filter Book, Client, Author, BorrowedBook
+
+paginate Book, Client, Author, BorrowedBook with infinite-scroll
+
+service all with serviceImpl
+dto * with mapstruct

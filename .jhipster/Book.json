@@ -1,0 +1,50 @@
+{
+  "applications": ["library"],
+  "changelogDate": "20230510231146",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "book",
+  "fields": [
+    {
+      "fieldName": "isbn",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "13",
+      "fieldValidateRulesMinlength": "5"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "publishYear",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "4"
+    },
+    {
+      "fieldName": "copies",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Book",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "author",
+      "otherEntityRelationshipName": "book",
+      "ownerSide": true,
+      "relationshipName": "author",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

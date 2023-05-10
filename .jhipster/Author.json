@@ -1,0 +1,30 @@
+{
+  "applications": ["library"],
+  "changelogDate": "20230510230946",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "author",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Author",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "book",
+      "otherEntityRelationshipName": "author",
+      "ownerSide": false,
+      "relationshipName": "book",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}
