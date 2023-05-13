@@ -1,0 +1,19 @@
+filebeat.inputs:
+  - type: container
+    paths:
+      - '/var/lib/docker/containers/8a45272d83733b20417d9ec60a091bfbdc2666c8c977323c58641fa5de761aae/*.log'
+    processors:
+      - decode_json_fields:
+          fields: ['message']
+          target: 'json'
+          overwrite_keys: true
+      - add_docker_metadata:
+          match_fields: ['container.id', 'container.name', 'container.image.name']
+
+output.elasticsearch:
+  hosts: ['elasticsearch:9200']
+  indices:
+    - index: 'library-%{[agent.version]}-%{+yyyy.MM.dd}'
+
+logging.json: true
+logging.metrics.enabled: false
