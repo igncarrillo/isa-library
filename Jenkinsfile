@@ -18,8 +18,6 @@ node {
     }
 
     stage('install tools') {
-        sh "apt-get update"
-        sh "apt-get install -y chromium-browser"
         sh "./mvnw -ntp com.github.eirslett:frontend-maven-plugin:install-node-and-npm@install-node-and-npm"
     }
 
