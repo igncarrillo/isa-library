@@ -46,6 +46,6 @@ services:
     image: elastic/filebeat:7.17.10
     user: root
     volumes:
-      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-      - /var/run/docker.sock:/var/run/docker.sock:delegated #enrich the logs with extra info as name of the image or the container
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro #config
+      - /var/run/docker.sock:/var/run/docker.sock:delegated #enrich logs with extra info of the container
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro #logs folder

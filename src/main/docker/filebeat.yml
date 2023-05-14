@@ -7,13 +7,15 @@ filebeat.inputs:
           fields: ['message']
           target: 'json'
           overwrite_keys: true
-      - add_docker_metadata:
-          match_fields: ['container.id', 'container.name', 'container.image.name']
+      - add_docker_metadata: ~
 
 output.elasticsearch:
   hosts: ['elasticsearch:9200']
   indices:
     - index: 'library-%{[agent.version]}-%{+yyyy.MM.dd}'
+      when.or:
+        - equals:
+            container.name: app
 
 logging.json: true
 logging.metrics.enabled: false

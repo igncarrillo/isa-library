@@ -7,7 +7,7 @@
     <list default="true" id="0d06af33-8a02-4dcd-a59f-4c5eb2e4da6e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/docker/app.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/docker/app.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/docker/filebeat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/docker/filebeat.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1683760086449</updated>
       <workItem from="1683760087448" duration="25375000" />
-      <workItem from="1683983497635" duration="22603000" />
+      <workItem from="1683983497635" duration="24057000" />
     </task>
     <servers />
   </component>
