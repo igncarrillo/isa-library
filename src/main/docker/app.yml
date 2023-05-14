@@ -49,3 +49,12 @@ services:
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro #config
       - /var/run/docker.sock:/var/run/docker.sock:delegated #enrich logs with extra info of the container
       - /var/lib/docker/containers:/var/lib/docker/containers:ro #logs folder
+
+  jenkins:
+    container_name: jenkins
+    #image: jenkins/jenkins / for mac m1 arm64 processor, build a custom image
+    build:
+      context: ./jenkins-arm64/
+      dockerfile: Dockerfile
+    ports:
+      - 8090:8080
