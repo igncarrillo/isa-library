@@ -52,7 +52,7 @@ services:
 
   jenkins:
     container_name: jenkins
-    # image: jenkins-jenkins / for mac m1 arm64 processor, build a custom image
+    #image: jenkins/jenkins / for mac m1 arm64 processor, build a custom image
     build:
       context: ./jenkins-arm64/
       dockerfile: Dockerfile
