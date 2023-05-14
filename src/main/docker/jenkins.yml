@@ -3,8 +3,7 @@ name: jenkins
 services:
   jenkins:
     container_name: jenkins
-    image: jenkins/jenkins
+    image: jenkins-arm64
     ports:
       - 8090:8080
       - 50000:50000
-    privileged: true
