@@ -11,7 +11,7 @@ services:
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - SPRING_DATASOURCE_URL=jdbc:postgresql://library-postgresql:5432/library
       - SPRING_LIQUIBASE_URL=jdbc:postgresql://library-postgresql:5432/library
-      - JHIPSTER_SLEEP=15 # gives time for other services to boot before the application
+      - JHIPSTER_SLEEP=5 # gives time for other services to boot before the application
     ports:
       - 8080:8080
     restart: unless-stopped
@@ -26,35 +26,3 @@ services:
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
     restart: unless-stopped
-
-  elasticsearch:
-    container_name: elastic
-    image: elasticsearch:7.17.10
-    environment:
-      - 'discovery.type=single-node'
-    ports:
-      - '9200:9200'
-
-  kibana:
-    container_name: kibana
-    image: kibana:7.17.10
-    ports:
-      - '5601:5601'
-
-  filebeat:
-    container_name: filebeat
-    image: elastic/filebeat:7.17.10
-    user: root
-    volumes:
-      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro #config
-      - /var/run/docker.sock:/var/run/docker.sock:delegated #enrich logs with extra info of the container
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro #logs folder
-
-  jenkins:
-    container_name: jenkins
-    # image: jenkins-jenkins / for mac m1 arm64 processor, build a custom image
-    build:
-      context: ./jenkins-arm64/
-      dockerfile: Dockerfile
-    ports:
-      - 8090:8080

@@ -1,7 +1,7 @@
 filebeat.inputs:
   - type: container
     paths:
-      - '/var/lib/docker/containers/8a45272d83733b20417d9ec60a091bfbdc2666c8c977323c58641fa5de761aae/*.log'
+      - '/var/lib/docker/containers/*/*.log'
     processors:
       - decode_json_fields:
           fields: ['message']
