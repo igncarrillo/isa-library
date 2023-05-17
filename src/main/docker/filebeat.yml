@@ -16,6 +16,10 @@ output.elasticsearch:
       when.or:
         - equals:
             container.name: app
+    - index: 'pwa-%{[agent.version]}-%{+yyyy.MM.dd}'
+      when.or:
+        - equals:
+            container.name: pwa
 
 logging.json: true
 logging.metrics.enabled: false

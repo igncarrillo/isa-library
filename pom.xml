@@ -582,6 +582,9 @@
                                 <password>${DOCKER_REGISTRY_PWD}</password>
                             </auth>
                         </to>
+                        <!--to>
+                            <image>library:latest</image>
+                        </to-->
                         <container>
                             <entrypoint>
                                 <shell>bash</shell>
