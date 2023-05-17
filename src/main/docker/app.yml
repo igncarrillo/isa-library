@@ -30,7 +30,7 @@ services:
   pwa:
     container_name: pwa
     build:
-      context: /Users/nachoc-mini/Dev/isa/library-pwa
+      context: ./../../../../library-pwa
       dockerfile: Dockerfile
     ports:
       - 3000:3000
