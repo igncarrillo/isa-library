@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0d06af33-8a02-4dcd-a59f-4c5eb2e4da6e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/library.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/docker/app.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/docker/app.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/docker/filebeat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/docker/filebeat.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/application-prod.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +49,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/nachoc-mini/Dev/isa/library&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/nachoc-mini/Dev/isa/library/src/main/docker/pwa&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -58,6 +61,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/docker/pwa" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -77,6 +81,8 @@
       <updated>1683760086449</updated>
       <workItem from="1683760087448" duration="25375000" />
       <workItem from="1683983497635" duration="24057000" />
+      <workItem from="1684215937720" duration="2813000" />
+      <workItem from="1684278424305" duration="3797000" />
     </task>
     <servers />
   </component>
