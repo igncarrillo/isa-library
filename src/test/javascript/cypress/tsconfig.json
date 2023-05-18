@@ -4,10 +4,7 @@
     "baseUrl": "./",
     "outDir": "../../../../target/out-tsc/cypress",
     "target": "es2018",
-    "types": ["cypress", "node"],
-    "strict": false,
-    "strictNullChecks": false,
-    "noImplicitAny": false
+    "types": ["cypress", "node"]
   },
   "include": ["./../../../../cypress*.config.ts", "./**/*.ts"]
 }
