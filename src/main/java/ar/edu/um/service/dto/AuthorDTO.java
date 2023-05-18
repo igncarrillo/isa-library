@@ -2,13 +2,21 @@ package ar.edu.um.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * A DTO for the {@link ar.edu.um.domain.Author} entity.
  */
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class AuthorDTO implements Serializable {
+
+    public AuthorDTO(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public AuthorDTO() {}
 
     private Long id;
 
